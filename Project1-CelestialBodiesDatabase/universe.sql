@@ -24,11 +24,13 @@ INSERT INTO galaxy (name, age_million_years, diameter_thousand_light_years, sola
 -- Create star table
 CREATE TABLE star (
 	star_id SERIAL PRIMARY KEY, 
-	name VARCHAR(255) UNIQUE NOT null,
+	galaxy_id INT NOT NULL,
+	name VARCHAR(255) UNIQUE NOT NULL,
 	age_million_years INT NOT NULL,
 	diameter_thousand_kilometers INT NOT NULL,
 	solar_mass DECIMAL NOT NULL,
 	is_visible BOOLEAN NOT NULL,
 	is_exoplanet_host BOOLEAN NOT NULL,
-	description TEXT NOT NULL
+	description TEXT NOT NULL,
+	FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
 );
