@@ -34,3 +34,13 @@ CREATE TABLE star (
 	description TEXT NOT NULL,
 	FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
 );
+
+-- Fill star table (ChatGPT is used for getting the information)
+INSERT INTO star (galaxy_id, name, age_million_years, diameter_thousand_kilometers, solar_mass, is_visible, is_exoplanet_host, description)
+VALUES
+((SELECT galaxy_id FROM galaxy WHERE name = 'Milky Way'), 'Sun', 4602, 1392, 1.9885, true, true, 'The closest star to Earth.'),
+((SELECT galaxy_id FROM galaxy WHERE name = 'Milky Way'), 'Sirius', 250, 18200, 2.063, true, true, 'The brightest star in the night sky.'),
+((SELECT galaxy_id FROM galaxy WHERE name = 'Milky Way'), 'Alpha Centauri', 6000, 207, 2.447, true, true, 'The closest star system to Earth.'),
+((SELECT galaxy_id FROM galaxy WHERE name = 'Andromeda'), 'Alpheratz', 70, 48, 1.8, true, false, 'The brightest star in the constellation Andromeda.'),
+((SELECT galaxy_id FROM galaxy WHERE name = 'Andromeda'), 'Mirach', 200, 60, 3.26, true, false, 'A red giant star in the constellation Andromeda.'),
+((SELECT galaxy_id FROM galaxy WHERE name = 'Whirlpool'), 'NGC 5195 X-1', 10, 0.01, 5, false, true, 'An ultra-luminous X-ray source in the galaxy NGC 5195.');
