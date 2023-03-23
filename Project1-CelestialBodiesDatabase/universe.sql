@@ -59,3 +59,18 @@ CREATE TABLE planet (
 	FOREIGN KEY (star_id) REFERENCES star(star_id)
 );
 
+-- Fill planet table (ChatGPT is used for getting the information)
+INSERT INTO planet (star_id, name, age_thousand_years, diameter_thousand_kilometers, solar_mass, can_support_life, has_atmosphere, description)
+VALUES
+(SELECT star_id FROM star WHERE name = 'Sun', 'Mercury', 4500, 4880, 0.055, FALSE, FALSE, 'The smallest planet in the solar system.'),
+(SELECT star_id FROM star WHERE name = 'Sun', 'Venus', 4500, 12104, 0.815, FALSE, TRUE, 'The hottest planet in the solar system.'),
+(SELECT star_id FROM star WHERE name = 'Sun', 'Earth', 4500, 12756, 1, TRUE, TRUE, 'The only planet known to support life.'),
+(SELECT star_id FROM star WHERE name = 'Sun', 'Mars', 4500, 6792, 0.107, FALSE, FALSE, 'Often referred to as the "Red Planet".'),
+(SELECT star_id FROM star WHERE name = 'Sun', 'Jupiter', 4500, 142984, 317.8, FALSE, TRUE, 'The largest planet in the solar system.'),
+(SELECT star_id FROM star WHERE name = 'Sun', 'Saturn', 4500, 120536, 95.2, FALSE, TRUE, 'Known for its distinctive rings.'),
+(SELECT star_id FROM star WHERE name = 'Sun', 'Uranus', 4500, 51118, 14.5, FALSE, TRUE, 'The first planet discovered with a telescope.'),
+(SELECT star_id FROM star WHERE name = 'Sun', 'Neptune', 4500, 49528, 17.1, FALSE, TRUE, 'The farthest planet from the sun.'),
+(SELECT star_id FROM star WHERE name = 'Sirius','Sirius b', 5000, 12000, 0.005, false, true, 'A small rocky planet orbiting around the star Sirius.'),
+(SELECT star_id FROM star WHERE name = 'Sirius','Sirius c', 2000, 10000, 0.003, false, true, 'A colder and larger gas giant planet orbiting around the star Sirius.'),
+(SELECT star_id FROM star WHERE name = 'Alpha Centauri','Alpha Centauri b', 8000, 15000, 0.01, true, true, 'A rocky planet with a thick atmosphere, potentially habitable, orbiting around the star Alpha Centauri.'),
+(SELECT star_id FROM star WHERE name = 'Alpha Centauri','Alpha Centauri c', 3000, 20000, 0.02, false, true, 'A gas giant planet with multiple moons, orbiting around the star Alpha Centauri.');
