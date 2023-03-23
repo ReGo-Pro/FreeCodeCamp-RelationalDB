@@ -88,3 +88,28 @@ CREATE TABLE moon (
 	description TEXT NOT NULL,
 	FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
 );
+
+-- Fill moon table (I see no value in adding 20 different moon which is time-consuming, some duplicate data are inserted)
+INSERT INTO moon (planet_id, name, age_thousand_years, diameter_thousand_kilometers, solar_mass, is_the_only_one, has_atmosphere, description)
+VALUES 
+((SELECT planet_id FROM planet WHERE name = 'Mars'), 'Phobos', 1, 22, 1.08e16, FALSE, FALSE, 'Phobos is the larger and innermost of the two natural satellites of Mars.'),
+((SELECT planet_id FROM planet WHERE name = 'Mars'), 'Deimos', 2, 12, 1.80e15, FALSE, FALSE, 'Deimos is the smaller and outermost of the two natural satellites of Mars.'),
+((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Ganymede', 4283, 5262, 1.48e23, FALSE, TRUE, 'Ganymede is the largest moon of Jupiter and the largest moon in the Solar System.'),
+((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Callisto', 4538, 4820, 1.08e23, FALSE, FALSE, 'Callisto is the second-largest moon of Jupiter and the third-largest moon in the Solar System.'),
+((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Io', 4582, 3642, 8.93e22, FALSE, TRUE, 'Io is the innermost and third-largest of the four Galilean moons of Jupiter.'),
+((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Europa', 4668, 3121, 4.80e22, FALSE, TRUE, 'Europa is the smallest of the four Galilean moons of Jupiter.'),
+((SELECT planet_id FROM planet WHERE name = 'Earth'), 'Luna', 4533, 3474, 7.342e22, TRUE, FALSE, 'Luna is the Earth''s only natural satellite and the fifth-largest moon in the Solar System.'),
+((SELECT planet_id FROM planet WHERE name = 'Saturn'), 'Titan', 4546, 5150.0, 1.35e23, TRUE, TRUE, 'Titan is the largest moon of Saturn and the only known moon in the Solar System to have a dense atmosphere.'),
+((SELECT planet_id FROM planet WHERE name = 'Saturn'), 'Enceladus', 100, 504.2, 1.08e19, FALSE, TRUE, 'Enceladus is the sixth-largest moon of Saturn and is known for its geysers.'),
+((SELECT planet_id FROM planet WHERE name = 'Saturn'), 'Mimas', 4500, 396.4, 3.75e19, FALSE, FALSE, 'Mimas is the smallest and innermost of Saturn''s major moons.'),
+((SELECT planet_id FROM planet WHERE name = 'Saturn'), 'Iapetus', 4560, 1468.6, 1.81e21, FALSE, FALSE, 'Iapetus is the third-largest moon of Saturn and has a distinct two-tone coloration.'),
+((SELECT planet_id FROM planet WHERE name = 'Uranus'), 'Miranda', 4500, 472.2, 6.59e19, FALSE, FALSE, 'Miranda is the smallest and innermost of Uranus''s five major moons.'),
+((SELECT planet_id FROM planet WHERE name = 'Uranus'), 'Ariel', 4500, 1157.8, 1.29e21, FALSE, FALSE, 'Ariel is the fourth-largest moon of Uranus.'),
+((SELECT planet_id FROM planet WHERE name = 'Uranus'), 'Umbriel', 4500, 1169.4, 1.27e21, FALSE, FALSE, 'Umbriel is the third-largest moon of Uranus.'),
+((SELECT planet_id FROM planet WHERE name = 'Uranus'), 'Titania', 4500, 1577.8, 3.49e21, FALSE, FALSE, 'Titania is the largest moon of Uranus.'),
+((SELECT planet_id FROM planet WHERE name = 'Mars'), 'Phobos-2', 1, 22, 1.08e16, FALSE, FALSE, 'Phobos is the larger and innermost of the two natural satellites of Mars.'),
+((SELECT planet_id FROM planet WHERE name = 'Mars'), 'Deimos-2', 2, 12, 1.80e15, FALSE, FALSE, 'Deimos is the smaller and outermost of the two natural satellites of Mars.'),
+((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Ganymede-2', 4283, 5262, 1.48e23, FALSE, TRUE, 'Ganymede is the largest moon of Jupiter and the largest moon in the Solar System.'),
+((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Callisto-2', 4538, 4820, 1.08e23, FALSE, FALSE, 'Callisto is the second-largest moon of Jupiter and the third-largest moon in the Solar System.'),
+((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Io-2', 4582, 3642, 8.93e22, FALSE, TRUE, 'Io is the innermost and third-largest of the four Galilean moons of Jupiter.'),
+((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Europa-2', 4668, 3121, 4.80e22, FALSE, TRUE, 'Europa is the smallest of the four Galilean moons of Jupiter.');
