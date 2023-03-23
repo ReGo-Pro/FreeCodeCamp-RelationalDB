@@ -125,3 +125,10 @@ CREATE TABLE meteor (
 	is_dangerous BOOLEAN NOT NULL,
 	description TEXT NOT NULL
 );
+
+-- Fill meteor table
+INSERT INTO meteor (name, age_thousand_years, diameter_thousand_kilometers, mass_thousand_tons, is_in_solar_system, is_dangerous, description)
+VALUES 
+('Apollo', 4, 3, 1.2, true, false, 'Apollo is a meteor that was discovered in 1932.'),
+('Ceres', 4, 590, 9400, true, false, 'Ceres is a dwarf planet and the largest object in the asteroid belt.'),
+('Bennu', 1, 1, 0.00008, true, true, 'Bennu is a potentially hazardous asteroid that may collide with Earth in the future.');
