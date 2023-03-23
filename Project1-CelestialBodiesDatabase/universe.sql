@@ -75,7 +75,7 @@ VALUES
 ((SELECT star_id FROM star WHERE name = 'Alpha Centauri'),'Alpha Centauri b', 8000, 15000, 0.01, true, true, 'A rocky planet with a thick atmosphere, potentially habitable, orbiting around the star Alpha Centauri.'),
 ((SELECT star_id FROM star WHERE name = 'Alpha Centauri'),'Alpha Centauri c', 3000, 20000, 0.02, false, true, 'A gas giant planet with multiple moons, orbiting around the star Alpha Centauri.');
 
--- Create planet moon
+-- Create moon table
 CREATE TABLE moon (
 	moon_id SERIAL PRIMARY KEY, 
 	planet_id INT NOT NULL,
@@ -113,3 +113,15 @@ VALUES
 ((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Callisto-2', 4538, 4820, 1.08e23, FALSE, FALSE, 'Callisto is the second-largest moon of Jupiter and the third-largest moon in the Solar System.'),
 ((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Io-2', 4582, 3642, 8.93e22, FALSE, TRUE, 'Io is the innermost and third-largest of the four Galilean moons of Jupiter.'),
 ((SELECT planet_id FROM planet WHERE name = 'Jupiter'), 'Europa-2', 4668, 3121, 4.80e22, FALSE, TRUE, 'Europa is the smallest of the four Galilean moons of Jupiter.');
+
+-- Create meteor table
+CREATE TABLE meteor (
+	meteor_id SERIAL PRIMARY KEY, 
+	name VARCHAR(255) UNIQUE NOT NULL,
+	age_thousand_years INT NOT NULL,
+	diameter_thousand_kilometers INT NOT NULL,
+	mass_thousand_tons DECIMAL NOT NULL,
+	is_in_solar_system BOOLEAN NOT NULL,
+	is_dangerous BOOLEAN NOT NULL,
+	description TEXT NOT NULL
+);
