@@ -43,4 +43,19 @@ VALUES
 ((SELECT galaxy_id FROM galaxy WHERE name = 'Milky Way'), 'Alpha Centauri', 6000, 207, 2.447, true, true, 'The closest star system to Earth.'),
 ((SELECT galaxy_id FROM galaxy WHERE name = 'Andromeda'), 'Alpheratz', 70, 48, 1.8, true, false, 'The brightest star in the constellation Andromeda.'),
 ((SELECT galaxy_id FROM galaxy WHERE name = 'Andromeda'), 'Mirach', 200, 60, 3.26, true, false, 'A red giant star in the constellation Andromeda.'),
-((SELECT galaxy_id FROM galaxy WHERE name = 'Whirlpool'), 'NGC 5195 X-1', 10, 0.01, 5, false, true, 'An ultra-luminous X-ray source in the galaxy NGC 5195.');
+((SELECT galaxy_id FROM galaxy WHERE name = 'Whirlpool'), 'NGC 5195 X-1', 10, 1, 5, false, true, 'An ultra-luminous X-ray source in the galaxy NGC 5195.');
+
+-- Create planet table
+CREATE TABLE planet (
+	planet_id SERIAL PRIMARY KEY, 
+	star_id INT NOT NULL,
+	name VARCHAR(255) UNIQUE NOT NULL,
+	age_thousand_years INT NOT NULL,
+	diameter_thousand_kilometers INT NOT NULL,
+	solar_mass DECIMAL NOT NULL,
+	can_support_life BOOLEAN NOT NULL,
+	has_atmosphere BOOLEAN NOT NULL,
+	description TEXT NOT NULL,
+	FOREIGN KEY (star_id) REFERENCES star(star_id)
+);
+
