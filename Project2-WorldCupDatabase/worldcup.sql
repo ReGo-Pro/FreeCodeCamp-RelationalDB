@@ -1,0 +1,6 @@
+CREATE DATABASE worldcup;
+
+CREATE TABLE teams (
+	team_id SERIAL PRIMARY KEY,
+	name VARCHAR(255) UNIQUE NOT NULL
+);
