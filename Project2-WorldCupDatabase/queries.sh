@@ -39,3 +39,6 @@ echo "$($PSQL "SELECT t.name FROM games g INNER JOIN teams t ON (t.team_id = g.w
 
 echo -e "\nList of unique winning team names in the whole data set:"
 echo "$($PSQL "SELECT name FROM teams WHERE team_id IN (SELECT DISTINCT winner_id FROM games) ORDER BY name")"
+
+echo -e "\nYear and team name of all the champions:"
+echo "$($PSQL "SELECT year, name FROM teams t INNER JOIN (SELECT year, winner_id FROM games WHERE round = 'Final') yt on t.team_id=yt.winner_id ORDER BY year")"
