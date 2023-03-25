@@ -32,3 +32,7 @@ echo "$($PSQL "SELECT COUNT(1) FROM games WHERE winner_goals > 2")"
 
 echo -e "\nWinner of the 2018 tournament team name:"
 echo "$($PSQL "SELECT name FROM teams WHERE team_id = (SELECT winner_id FROM games WHERE year = 2018 AND round = 'Final')")"
+
+echo -e "\nList of teams who played in the 2014 'Eighth-Final' round:"
+echo "$($PSQL "SELECT t.name FROM games g INNER JOIN teams t ON (t.team_id = g.winner_id OR t.team_id = g.opponent_id) WHERE year = 2014 AND round = 'Eighth-Final' ORDER BY name")"
+# This can also be written using UNION operator
