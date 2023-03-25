@@ -11,3 +11,6 @@ fi
 
 echo -e "\nTotal number of goals in all games from winning teams:"
 echo "$($PSQL "SELECT SUM(winner_goals) FROM games")"
+
+echo -e "\nTotal number of goals in all games from both teams combined:"
+echo "$($PSQL "SELECT SUM(winner_goals + opponent_goals) FROM games")"
