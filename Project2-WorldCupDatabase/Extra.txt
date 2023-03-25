@@ -1,0 +1,2 @@
+Give permission to the two .sh files:
+chmod +x insert_data.sh queries.sh 
