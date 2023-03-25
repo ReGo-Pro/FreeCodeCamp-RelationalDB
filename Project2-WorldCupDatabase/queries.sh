@@ -36,3 +36,6 @@ echo "$($PSQL "SELECT name FROM teams WHERE team_id = (SELECT winner_id FROM gam
 echo -e "\nList of teams who played in the 2014 'Eighth-Final' round:"
 echo "$($PSQL "SELECT t.name FROM games g INNER JOIN teams t ON (t.team_id = g.winner_id OR t.team_id = g.opponent_id) WHERE year = 2014 AND round = 'Eighth-Final' ORDER BY name")"
 # This can also be written using UNION operator
+
+echo -e "\nList of unique winning team names in the whole data set:"
+echo "$($PSQL "SELECT name FROM teams WHERE team_id IN (SELECT DISTINCT winner_id FROM games) ORDER BY name")"
