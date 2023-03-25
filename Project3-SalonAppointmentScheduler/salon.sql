@@ -14,3 +14,8 @@ create table appointments (
 	FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
 	FOREIGN KEY (service_id) REFERENCES services(service_id)
 );
+
+create table services (
+	service_id SERIAL PRIMARY KEY,
+	name VARCHAR(255) NOT NULL
+);
