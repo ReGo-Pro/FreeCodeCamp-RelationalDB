@@ -29,3 +29,6 @@ echo "$($PSQL "SELECT MAX(winner_goals) FROM games")"
 
 echo -e "\nNumber of games where the winning team scored more than two goals:"
 echo "$($PSQL "SELECT COUNT(1) FROM games WHERE winner_goals > 2")"
+
+echo -e "\nWinner of the 2018 tournament team name:"
+echo "$($PSQL "SELECT name FROM teams WHERE team_id = (SELECT winner_id FROM games WHERE year = 2018 AND round = 'Final')")"
