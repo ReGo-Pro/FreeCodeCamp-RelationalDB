@@ -10,10 +10,10 @@ create table appointments (
 	appointment_id SERIAL PRIMARY KEY,
 	customer_id INT NOT NULL,
 	service_id INt NOT NULL,
-	time VARCHAR(255),
-	FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-	FOREIGN KEY (service_id) REFERENCES services(service_id)
+	time VARCHAR(255)
 );
+ALTER TABLE appointments ADD CONSTRAINT fk_appointments_customers FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
+ALTER TABLE appointments ADD CONSTRAINT fk_appointments_services FOREIGN KEY (service_id) REFERENCES services(service_id);
 
 create table services (
 	service_id SERIAL PRIMARY KEY,
