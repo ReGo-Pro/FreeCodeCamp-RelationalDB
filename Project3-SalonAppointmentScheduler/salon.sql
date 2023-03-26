@@ -19,3 +19,5 @@ create table services (
 	service_id SERIAL PRIMARY KEY,
 	name VARCHAR(255) NOT NULL
 );
+
+INSERT INTO Services (name) VALUES ('Hiarcut'), ('Shave'), ('Trim');
