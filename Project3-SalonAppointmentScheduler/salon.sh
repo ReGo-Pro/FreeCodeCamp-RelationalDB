@@ -13,30 +13,40 @@ function DISPLAY_SERVICES() {
   echo $FORMATTED_RES
 }
 
-#function GET_CUSTOMER_NAME() {
-#  # Some other checks can be in place like making sure the name does not include numbers in it
-#  while [[ -z $CUSTOMER_NAME ]]
-#  do 
-#    echo "Please give us your name:"
-#    read CUSTOMER_NAME
-#  done
-#}
-#
-#function GET_SERVICE_TIME() {
-#    while [[ -z $SERVICE_TIME ]]
-#    do 
-#      echo "Please book a time for your service:"
-#      read SERVICE_TIME
-#    done
-#}
-
-function READ_INPUT() {
-  while [[ -z $USER_INPUT ]] 
-  do
-    read USER_INPUT
+function READ_CUSTOMER_PHONE() {
+  # Some other checks can be in place like making sure the name does not include numbers in it
+  while [[ -z $CUSTOMER_PHONE ]]
+  do 
+    echo "Please enter your phone number:"
+    read CUSTOMER_PHONE
   done
-  echo $USER_INPUT
 }
+
+function READ_CUSTOMER_NAME() {
+  # Some other checks can be in place like making sure the name does not include numbers in it
+  while [[ -z $CUSTOMER_NAME ]]
+  do 
+    echo "Please give us your name:"
+    read CUSTOMER_NAME
+  done
+}
+
+function READ_SERVICE_TIME() {
+    while [[ -z $SERVICE_TIME ]]
+    do 
+      echo "Please book a time for your service:"
+      read SERVICE_TIME
+    done
+}
+
+# This works, but does not pass 1 of the tests (reading input test)
+# function READ_INPUT() {
+#   while [[ -z $USER_INPUT ]] 
+#   do
+#     read USER_INPUT
+#   done
+#   echo $USER_INPUT
+# }
 
 while [[ -z $SERVICE_EXISTS ]]
 do 
@@ -46,19 +56,15 @@ do
   SERVICE_EXISTS=$($PSQL "SELECT 1 FROM services WHERE service_id = $SERVICE_ID_SELECTED")
 done
 
-echo "Please enter your phone number:"
-CUSTOMER_PHONE=$(READ_INPUT)
+READ_CUSTOMER_PHONE
 CUSTOMER_NAME=$($PSQL "SELECT name FROM customers WHERE phone = '$CUSTOMER_PHONE'")
 if [[ -z $CUSTOMER_NAME ]]
 then 
-  echo "Please enter your name:"
-  #GET_CUSTOMER_NAME
-  CUSTOMER_NAME=$(READ_INPUT)
+  READ_CUSTOMER_NAME
   INSERT_RESULT=$($PSQL "INSERT INTO customers (name, phone) VALUES ('$CUSTOMER_NAME', '$CUSTOMER_PHONE')") 
 fi 
 
-echo "Please pick a time for your service:"
-SERVICE_TIME=$(READ_INPUT)
+READ_SERVICE_TIME
 CUSTOMER_ID=$($PSQL "SELECT customer_id FROM customers WHERE phone='$CUSTOMER_PHONE'")
 INSERT_RES=$($PSQL "INSERT INTO appointments (customer_id, service_id, time) VALUES ($CUSTOMER_ID, $SERVICE_ID_SELECTED, '$SERVICE_TIME')")
 
