@@ -28,4 +28,8 @@ UPDATE properties SET type_id = (SELECT type_id FROM types WHERE type = 'metallo
 ALTER TABLE properties ALTER COLUMN type_id SET NOT NULL;
 ALTER TABLE properties DROP COLUMN type;
 
-UPDATE elements e1 SET symbol = (SELECT INITCAP(symbol) FROM elements e2 WHERE e2.atomic_number = e1.atomic_number);
+UPDATE elements SET symbol = INITCAP(symbol);
+
+-- Remove trailing zeros from atomic_mass column in properties table
+ALTER TABLE properties ALTER COLUMN atomic_mass TYPE DECIMAL;
+UPDATE properties SET atomic_mass = TRIM(TRAILING '0' FROM atomic_mass::text)::numeric;
