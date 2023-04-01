@@ -33,3 +33,10 @@ UPDATE elements SET symbol = INITCAP(symbol);
 -- Remove trailing zeros from atomic_mass column in properties table
 ALTER TABLE properties ALTER COLUMN atomic_mass TYPE DECIMAL;
 UPDATE properties SET atomic_mass = TRIM(TRAILING '0' FROM atomic_mass::text)::numeric;
+
+-- Adding new elements and their properties
+insert into elements (atomic_number, symbol, name) 
+values (9, 'F', 'Fluorine'), (10, 'Ne', 'Neon');
+
+insert into properties (atomic_number, atomic_mass, melting_point_celsius, boiling_point_celsius, type_id) 
+values (9, 18.998, -220, -188.1, 2), (10, 20.18, -248.6, -246.1, 2);
