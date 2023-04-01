@@ -28,3 +28,4 @@ UPDATE properties SET type_id = (SELECT type_id FROM types WHERE type = 'metallo
 ALTER TABLE properties ALTER COLUMN type_id SET NOT NULL;
 ALTER TABLE properties DROP COLUMN type;
 
+UPDATE elements e1 SET symbol = (SELECT INITCAP(symbol) FROM elements e2 WHERE e2.atomic_number = e1.atomic_number);
