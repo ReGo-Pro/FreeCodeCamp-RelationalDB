@@ -9,7 +9,6 @@ function GET_ELEMENT() {
   else 
     ELEMENT=$($PSQL "SELECT * FROM elements WHERE name='$1' OR symbol='$1'")
   fi
-
   echo $ELEMENT
 }
 
@@ -17,5 +16,5 @@ if [[ -z $1 ]]
 then
   echo "Please provide an element as an argument."
 else 
-  GET_ELEMENT $1
+  IFS='|' read -r -a ELEMENT_INFO <<< $(GET_ELEMENT $1)
 fi
