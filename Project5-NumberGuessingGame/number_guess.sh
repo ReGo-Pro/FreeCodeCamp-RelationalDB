@@ -46,11 +46,6 @@ function HANDLE_GUESSED_NUMBER() {
   done
 }
 
-# $1: guessed number - $2 generated number
-function GAME_LOGIC() {
-  echo "$1 -- $2" 
-}
-
 ### main
 GENERATED_NUMBER=$(( RANDOM % 1000 ))
 echo $GENERATED_NUMBER
