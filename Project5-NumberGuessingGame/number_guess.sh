@@ -11,16 +11,19 @@ function READ_USER_NAME() {
 
 # Pass user-name as argument
 function HANDLE_USER() {
-  USER_EXISTS=$($PSQL "SELECT 1 FROM users WHERE name='$1'")
-  if [[ $USER_EXISTS == 1 ]]
-  then 
-    echo echo "Welcome back, $1! You have played <games_played> games, and your best game took <best_game> guesses."
-  else 
+  IFS='|' read -r -a USER_INFO <<< $($PSQL "SELECT 1 FROM users WHERE name='$1'")  
+  if [[ -z $USER_INFO ]]
+  then
     echo "Welcome, $1! It looks like this is your first time here."
+    INSERT_RESULT=$($PSQL "INSERT INTO users (name, games_played, best_game) VALUES ('$1', 0, 0)")
+  else 
+    echo "Welcome back, $1! You have played ${USER_INFO[2]} games, and your best game took ${USER_INFO[3]} guesses."
   fi
 }
 
+### main
 GENERATED_NUMBER=$(( RANDOM % 1000 ))
 echo "Enter your username:"
 READ_USER_NAME
 HANDLE_USER $USER_NAME
+
