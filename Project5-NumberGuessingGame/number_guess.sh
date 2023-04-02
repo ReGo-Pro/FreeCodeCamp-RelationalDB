@@ -14,9 +14,9 @@ function HANDLE_USER() {
   USER_EXISTS=$($PSQL "SELECT 1 FROM users WHERE name='$1'")
   if [[ $USER_EXISTS == 1 ]]
   then 
-    echo "Existing user"
+    echo echo "Welcome back, $1! You have played <games_played> games, and your best game took <best_game> guesses."
   else 
-    echo "New user"
+    echo "Welcome, $1! It looks like this is your first time here."
   fi
 }
 
