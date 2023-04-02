@@ -2,22 +2,19 @@
 
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
 
-function READ_USER_NAME() {
+function HANDLE_USER() {
   while [[ -z $USER_NAME ]] 
   do 
     read USER_NAME
   done
-}
 
-# Pass user-name as argument
-function HANDLE_USER() {
-  IFS='|' read -r -a USER_INFO <<< $($PSQL "SELECT 1 FROM users WHERE name='$1'")  
+  IFS='|' read -r -a USER_INFO <<< $($PSQL "SELECT * FROM users WHERE name = '$USER_NAME'")  
   if [[ -z $USER_INFO ]]
   then
-    echo "Welcome, $1! It looks like this is your first time here."
-    INSERT_RESULT=$($PSQL "INSERT INTO users (name, games_played, best_game) VALUES ('$1', 0, 0)")
+    echo "Welcome, $USER_NAME! It looks like this is your first time here."
+    INSERT_RESULT=$($PSQL "INSERT INTO users (name, games_played, best_game) VALUES ('$USER_NAME', 0, 0)")
   else 
-    echo "Welcome back, $1! You have played ${USER_INFO[2]} games, and your best game took ${USER_INFO[3]} guesses."
+    echo "Welcome back, ${USER_INFO[1]}! You have played ${USER_INFO[2]} games, and your best game took ${USER_INFO[3]} guesses."
   fi
 }
 
@@ -58,7 +55,6 @@ function GAME_LOGIC() {
 GENERATED_NUMBER=$(( RANDOM % 1000 ))
 echo $GENERATED_NUMBER
 echo "Enter your username:"
-READ_USER_NAME
-HANDLE_USER $USER_NAME
+HANDLE_USER
 echo "Guess the secret number between 1 and 1000:"
 HANDLE_GUESSED_NUMBER $GENERATED_NUMBER
